@@ -1,6 +1,10 @@
 import { Flex, FormControl, FormLabel, Input, Text } from "@chakra-ui/react"
+import { useState } from "react";
 
 function App() {
+  const [name, setName] = useState('Opcional');
+
+  const handleName = (event) => setName(event.target.value)
 
   return (
     <>
@@ -29,8 +33,8 @@ function App() {
 
           <Flex minWidth='25em' maxWidth='lg' direction="column">
             <FormControl>
-              <FormLabel>Nome: </FormLabel>
-              <Input type='text' variant='outline' bgColor='white' />
+              <FormLabel>Nome: {name} </FormLabel>
+              <Input type='text' variant='outline' bgColor='white' onChange={handleName}/>
             </FormControl>
           </Flex>
 
