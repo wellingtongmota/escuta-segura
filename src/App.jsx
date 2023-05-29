@@ -15,11 +15,11 @@ function App() {
     onSubmit: values => {
 
       emailjs.send("service_d3qqm7b", "template_nqc16y5", values, "h65zWycJmVYy8bw1R")
-      .then((response) => {
-        console.log("E-mail enviado: ", response.status, response.text)
-      }, (err) => {
-        console.log("Erro: ", err)
-      })
+        .then((response) => {
+          console.log("E-mail enviado: ", response.status, response.text)
+        }, (err) => {
+          console.log("Erro: ", err)
+        })
     },
   });
 
@@ -54,9 +54,10 @@ function App() {
           Seja bem vindo ao canal de Denúncias da empresa DOVALE CHAVES, a confiança é um fator chave para a empresa que presa por relacionamentos duradouros com os colaboradores. Aqui é um local anônimo e seguro para recebimento de denúncias,  se tiver algo a dizer preencha o formulário abaixo:
         </Text>
 
-        <Flex w={[250, 300, 350, 400, 500]} direction="column" gap={3}>
 
-          <form onSubmit={formik.handleSubmit}>
+
+        <form onSubmit={formik.handleSubmit}>
+          <Flex w={[250, 300, 350, 400, 500]} direction="column" gap={3}>
             <FormControl>
               <FormLabel>Nome: <Text as="i" color="gray.600">Opcional</Text></FormLabel>
               <Input id="name" name="name" type='text' variant='outline' bgColor='white' onChange={formik.handleChange} />
@@ -78,8 +79,8 @@ function App() {
             </FormControl>
 
             <Button colorScheme="blue" mt={4} size="lg" w="100%" type="submit">Enviar</Button>
-          </form>
-        </Flex>
+          </Flex>
+        </form>
       </Flex>
     </>
   )
