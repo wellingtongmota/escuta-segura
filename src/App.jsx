@@ -77,7 +77,7 @@ function App() {
               <Textarea id="mensagem" name="mensagem" bgColor='white' placeholder='Escreva sua mensagem aqui' size='sm' borderRadius='md' onChange={formik.handleChange} />
             </FormControl>
 
-            <Button colorScheme="blue" mt={4} size="lg" type="submit">Enviar</Button>
+            <Button colorScheme="blue" mt={4} size="lg" w="100%" type="submit">Enviar</Button>
           </form>
         </Flex>
       </Flex>
