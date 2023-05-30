@@ -1,9 +1,29 @@
-import { Button, Flex, FormControl, FormLabel, Heading, Input, Text, Textarea } from "@chakra-ui/react";
+import { Button, Flex, FormControl, FormLabel, Heading, Input, Text, Textarea, useToast } from "@chakra-ui/react";
 import { useFormik } from "formik"
 import emailjs from "@emailjs/browser";
 import '@fontsource/teko';
 
 function App() {
+
+  const toast = useToast()
+
+  const mensagemServidor = (resposta) => {
+    if (resposta === 200)
+      toast({
+        description: "Mensagem enviada",
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      })
+    else {
+      toast({
+        description: "Erro ao enviar mensagem",
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      })
+    }
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -14,11 +34,13 @@ function App() {
     },
     onSubmit: values => {
 
-      emailjs.send("service_d3qqm7b", "template_nqc16y5", values, "h65zWycJmVYy8bw1R")
+      emailjs.send("service_d3qqm7b", "template_nqc16y5", values, "h65zWycJmVYy8bw1")
         .then((response) => {
           console.log("E-mail enviado: ", response.status, response.text)
+          mensagemServidor(response.status)
         }, (err) => {
           console.log("Erro: ", err)
+          mensagemServidor(err.status)
         })
     },
   });
@@ -54,10 +76,8 @@ function App() {
           Seja bem vindo ao canal de Denúncias da empresa DOVALE CHAVES, a confiança é um fator chave para a empresa que presa por relacionamentos duradouros com os colaboradores. Aqui é um local anônimo e seguro para recebimento de denúncias,  se tiver algo a dizer preencha o formulário abaixo:
         </Text>
 
-
-
         <form onSubmit={formik.handleSubmit}>
-          <Flex w={[250, 300, 350, 400, 500]} direction="column" gap={3}>
+          <Flex w={[300, 350, 400, 500]} direction="column" gap={3}>
             <FormControl>
               <FormLabel>Nome: <Text as="i" color="gray.600">Opcional</Text></FormLabel>
               <Input id="name" name="name" type='text' variant='outline' bgColor='white' onChange={formik.handleChange} />
