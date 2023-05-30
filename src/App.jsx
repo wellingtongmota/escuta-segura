@@ -59,11 +59,17 @@ export default function App() {
         p={2}
         overflow="scroll"
       >
-        <Flex align="baseline" gap={2} flexWrap='wrap' width="100%" justify="center">
+        <Flex
+          align="baseline"
+          gap={2}
+          flexWrap='wrap'
+          wi="100%"
+          justify="center"
+        >
           <Heading as='h1' size='4xl' color="blue.700">
             DOVALE
           </Heading>
-          <Heading as="b" fontSize="3xl" color="orange.500" noOfLines={1}>
+          <Heading as="b" fontSize="3xl" color="orange.500">
             Escuta Segura
           </Heading>
         </Flex>
@@ -79,24 +85,55 @@ export default function App() {
 
         <form onSubmit={formik.handleSubmit}>
           <Flex w={[300, 350, 400, 500]} direction="column" gap={3}>
+
             <FormControl>
               <FormLabel>Nome: <Text as="i" color="gray.600">Opcional</Text></FormLabel>
-              <Input id="name" name="name" type='text' variant='outline' bgColor='white' value={formik.values.name} onChange={formik.handleChange} />
+              <Input
+                name="name"
+                type='text'
+                variant='outline'
+                bgColor='white'
+                value={formik.values.name}
+                onChange={formik.handleChange}
+              />
             </FormControl>
 
             <FormControl>
               <FormLabel>E-mail: <Text as="i" color="gray.600">Opcional</Text></FormLabel>
-              <Input id="email" name="email" type='email' variant='outline' bgColor='white' value={formik.values.email} onChange={formik.handleChange} />
+              <Input
+                name="email"
+                type='email'
+                variant='outline'
+                bgColor='white'
+                value={formik.values.email}
+                onChange={formik.handleChange}
+              />
             </FormControl>
 
             <FormControl isRequired>
               <FormLabel>Assunto:</FormLabel>
-              <Input id="assunto" name="assunto" type='text' variant='outline' bgColor='white' value={formik.values.assunto} onChange={formik.handleChange} />
+              <Input
+                name="assunto"
+                type='text'
+                variant='outline'
+                bgColor='white'
+                placeholder='Descreva o assunto'
+                value={formik.values.assunto}
+                onChange={formik.handleChange}
+              />
             </FormControl>
 
             <FormControl isRequired>
               <FormLabel>Mensagem:</FormLabel>
-              <Textarea id="mensagem" name="mensagem" bgColor='white' placeholder='Escreva sua mensagem aqui' size='sm' borderRadius='md' value={formik.values.mensagem} onChange={formik.handleChange} />
+              <Textarea
+                name="mensagem"
+                bgColor='white'
+                size='sm'
+                borderRadius='md'
+                placeholder='Escreva sua mensagem aqui'
+                value={formik.values.mensagem}
+                onChange={formik.handleChange}
+              />
             </FormControl>
 
             <Button colorScheme="blue" mt={4} size="lg" w="100%" type="submit">Enviar</Button>
