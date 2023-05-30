@@ -34,7 +34,7 @@ function App() {
     },
     onSubmit: values => {
 
-      emailjs.send("service_d3qqm7b", "template_nqc16y5", values, "h65zWycJmVYy8bw1")
+      emailjs.send("service_d3qqm7b", "template_nqc16y5", values, "h65zWycJmVYy8bw1R")
         .then((response) => {
           console.log("E-mail enviado: ", response.status, response.text)
           mensagemServidor(response.status)
