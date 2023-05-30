@@ -1,9 +1,9 @@
-import { Button, Flex, FormControl, FormLabel, Heading, Input, Text, Textarea, useToast } from "@chakra-ui/react";
-import { useFormik } from "formik"
+import { Input, Button, Flex, FormControl, FormLabel, Text, Textarea, Heading, useToast } from "@chakra-ui/react";
+import { useFormik } from "formik";
 import emailjs from "@emailjs/browser";
 import '@fontsource/teko';
 
-function App() {
+export default function App() {
 
   const toast = useToast()
 
@@ -27,26 +27,27 @@ function App() {
 
   const formik = useFormik({
     initialValues: {
-      name: 'Anônimo',
-      email: 'Anônimo',
+      name: '',
+      email: '',
       assunto: '',
-      mensagem: '',
+      mensagem: ''
     },
-    onSubmit: values => {
 
+    onSubmit: (values, { resetForm }) => {
       emailjs.send("service_d3qqm7b", "template_nqc16y5", values, "h65zWycJmVYy8bw1R")
         .then((response) => {
           console.log("E-mail enviado: ", response.status, response.text)
           mensagemServidor(response.status)
+          resetForm()
         }, (err) => {
           console.log("Erro: ", err)
           mensagemServidor(err.status)
         })
     },
-  });
+  })
 
   return (
-    <>
+    <div>
       <Flex
         direction="column"
         align="center"
@@ -80,30 +81,29 @@ function App() {
           <Flex w={[300, 350, 400, 500]} direction="column" gap={3}>
             <FormControl>
               <FormLabel>Nome: <Text as="i" color="gray.600">Opcional</Text></FormLabel>
-              <Input id="name" name="name" type='text' variant='outline' bgColor='white' onChange={formik.handleChange} />
+              <Input id="name" name="name" type='text' variant='outline' bgColor='white' value={formik.values.name} onChange={formik.handleChange} />
             </FormControl>
 
             <FormControl>
               <FormLabel>E-mail: <Text as="i" color="gray.600">Opcional</Text></FormLabel>
-              <Input id="email" name="email" type='email' variant='outline' bgColor='white' onChange={formik.handleChange} />
+              <Input id="email" name="email" type='email' variant='outline' bgColor='white' value={formik.values.email} onChange={formik.handleChange} />
             </FormControl>
 
             <FormControl isRequired>
               <FormLabel>Assunto:</FormLabel>
-              <Input id="assunto" name="assunto" type='text' variant='outline' bgColor='white' onChange={formik.handleChange} />
+              <Input id="assunto" name="assunto" type='text' variant='outline' bgColor='white' value={formik.values.assunto} onChange={formik.handleChange} />
             </FormControl>
 
             <FormControl isRequired>
               <FormLabel>Mensagem:</FormLabel>
-              <Textarea id="mensagem" name="mensagem" bgColor='white' placeholder='Escreva sua mensagem aqui' size='sm' borderRadius='md' onChange={formik.handleChange} />
+              <Textarea id="mensagem" name="mensagem" bgColor='white' placeholder='Escreva sua mensagem aqui' size='sm' borderRadius='md' value={formik.values.mensagem} onChange={formik.handleChange} />
             </FormControl>
 
             <Button colorScheme="blue" mt={4} size="lg" w="100%" type="submit">Enviar</Button>
           </Flex>
         </form>
+
       </Flex>
-    </>
+    </div>
   )
 }
-
-export default App
