@@ -1,4 +1,4 @@
-import { Input, Button, Flex, FormControl, FormLabel, Text, Textarea, Heading, useToast } from "@chakra-ui/react";
+import { Input, Button, Flex, FormControl, FormLabel, Text, Textarea, Heading, useToast, FormHelperText } from "@chakra-ui/react";
 import { useFormik } from "formik";
 import emailjs from "@emailjs/browser";
 import '@fontsource/teko';
@@ -93,6 +93,7 @@ export default function App() {
                 type='text'
                 variant='outline'
                 bgColor='white'
+                maxLength={64}
                 value={formik.values.name}
                 onChange={formik.handleChange}
               />
@@ -105,6 +106,7 @@ export default function App() {
                 type='email'
                 variant='outline'
                 bgColor='white'
+                maxLength={256}
                 value={formik.values.email}
                 onChange={formik.handleChange}
               />
@@ -117,6 +119,7 @@ export default function App() {
                 type='text'
                 variant='outline'
                 bgColor='white'
+                maxLength={40}
                 placeholder='Descreva o assunto'
                 value={formik.values.assunto}
                 onChange={formik.handleChange}
@@ -133,7 +136,9 @@ export default function App() {
                 placeholder='Escreva sua mensagem aqui'
                 value={formik.values.mensagem}
                 onChange={formik.handleChange}
+                maxLength={1500}
               />
+              <FormHelperText textAlign="end">{formik.values.mensagem.length} / 1500</FormHelperText>
             </FormControl>
 
             <Button colorScheme="blue" mt={4} size="lg" w="100%" type="submit">Enviar</Button>
