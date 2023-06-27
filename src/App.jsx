@@ -7,7 +7,7 @@ export default function App() {
 
   const toast = useToast()
 
-  const mensagemServidor = (resposta) => {
+  const messageServer = (resposta) => {
     if (resposta === 200)
       toast({
         description: "Mensagem enviada",
@@ -29,19 +29,19 @@ export default function App() {
     initialValues: {
       name: '',
       email: '',
-      assunto: '',
-      mensagem: ''
+      subject: '',
+      message: ''
     },
 
     onSubmit: (values, { resetForm }) => {
       emailjs.send("service_d3qqm7b", "template_nqc16y5", values, "h65zWycJmVYy8bw1R")
         .then((response) => {
           console.log("E-mail enviado: ", response.status, response.text)
-          mensagemServidor(response.status)
+          messageServer(response.status)
           resetForm()
         }, (err) => {
           console.log("Erro: ", err)
-          mensagemServidor(err.status)
+          messageServer(err.status)
         })
     },
   })
@@ -67,7 +67,7 @@ export default function App() {
           justify="center"
         >
           <Heading as='h1' size='4xl' color="blue.700">
-            DOVALE
+            EMPRESA
           </Heading>
           <Heading as="b" fontSize="3xl" color="orange.500">
             Escuta Segura
@@ -80,7 +80,7 @@ export default function App() {
           mb={2}
           maxWidth='3xl'
         >
-          Seja bem vindo ao canal de Denúncias da empresa DOVALE CHAVES, a confiança é um fator chave para a empresa que presa por relacionamentos duradouros com os colaboradores. Aqui é um local anônimo e seguro para recebimento de denúncias,  se tiver algo a dizer preencha o formulário abaixo:
+          Seja bem vindo ao canal de Denúncias da empresa NOME, a confiança é um fator chave para a empresa que presa por relacionamentos duradouros com os colaboradores. Aqui é um local anônimo e seguro para recebimento de denúncias,  se tiver algo a dizer preencha o formulário abaixo:
         </Text>
 
         <form onSubmit={formik.handleSubmit}>
@@ -115,13 +115,13 @@ export default function App() {
             <FormControl isRequired>
               <FormLabel>Assunto:</FormLabel>
               <Input
-                name="assunto"
+                name="subject"
                 type='text'
                 variant='outline'
                 bgColor='white'
                 maxLength={40}
                 placeholder='Descreva o assunto'
-                value={formik.values.assunto}
+                value={formik.values.subject}
                 onChange={formik.handleChange}
               />
             </FormControl>
@@ -129,16 +129,16 @@ export default function App() {
             <FormControl isRequired>
               <FormLabel>Mensagem:</FormLabel>
               <Textarea
-                name="mensagem"
+                name="message"
                 bgColor='white'
                 size='sm'
                 borderRadius='md'
                 placeholder='Escreva sua mensagem aqui'
-                value={formik.values.mensagem}
+                value={formik.values.message}
                 onChange={formik.handleChange}
                 maxLength={1500}
               />
-              <FormHelperText textAlign="end">{formik.values.mensagem.length} / 1500</FormHelperText>
+              <FormHelperText textAlign="end">{formik.values.message.length} / 1500</FormHelperText>
             </FormControl>
 
             <Button colorScheme="blue" mt={4} size="lg" w="100%" type="submit">Enviar</Button>
