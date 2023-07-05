@@ -1,5 +1,0 @@
-const handleName = () => {
-  
-}
-
-export { handleName }
